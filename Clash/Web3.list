@@ -40,10 +40,9 @@ DOMAIN-SUFFIX,poly.network
 DOMAIN-SUFFIX,zkscan.io
 DOMAIN-SUFFIX,zksync.io
 DOMAIN-SUFFIX,boba.network
-
-# > custom
 DOMAIN-SUFFIX,bscscan.com
 DOMAIN-SUFFIX,gmgn.ai
+DOMAIN-SUFFIX,fomo.family
 
 # > Binance
 DOMAIN-SUFFIX,binance.cc
