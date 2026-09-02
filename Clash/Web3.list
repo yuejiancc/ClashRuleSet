@@ -41,6 +41,10 @@ DOMAIN-SUFFIX,zkscan.io
 DOMAIN-SUFFIX,zksync.io
 DOMAIN-SUFFIX,boba.network
 
+# > custom
+DOMAIN-SUFFIX,bscscan.com
+DOMAIN-SUFFIX,gmgn.ai
+
 # > Binance
 DOMAIN-SUFFIX,binance.cc
 DOMAIN-SUFFIX,binance.cloud
