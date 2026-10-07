@@ -30,6 +30,9 @@ DOMAIN-SUFFIX,hf.co
 DOMAIN-KEYWORD,huggingface
 
 
+# Cloudflare dashboard and API
+DOMAIN,dash.cloudflare.com
+DOMAIN,api.cloudflare.com
 DOMAIN-SUFFIX,r2.cloudflarestorage.com
 DOMAIN-SUFFIX,files.pythonhosted.org
 
