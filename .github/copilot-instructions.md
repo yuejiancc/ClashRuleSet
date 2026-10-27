@@ -28,7 +28,7 @@ ClashRuleSet is a curated collection of domain/IP filtering rules for **Clash** 
 
 - `kclash.ini`: Connects rules to proxy groups
   - `[custom]` section: `ruleset=label`URL pairs + `custom_proxy_group` definitions
-  - Proxy groups use backtick-separated chains: `custom_proxy_group=label`select`[]node1`[]node2`.*`
+  - Proxy groups use backtick-separated fields: label, select, then `.*` and optional built-in policies
 - `pref.ini`: Rule generator settings (exclude patterns, base configs, proxy settings)
 
 ## Key Patterns & Conventions
@@ -48,22 +48,26 @@ ClashRuleSet is a curated collection of domain/IP filtering rules for **Clash** 
 
 ### Configuration Patterns
 
-**Proxy Group Fallback Chains** (in `kclash.ini`):
+**Proxy Group Members** (in `kclash.ini` and `pref.ini`):
 
 ```
-custom_proxy_group=🇺🇲 美区AI`select`[]🇺🇲 美国节点`[]🇸🇬 新加坡节点`[]🚀 节点选择`[]🫙 自定义`.*
+custom_proxy_group=🇺🇲 美区AI`select`.*
+custom_proxy_group=🔒 Web3`select`.*`[]DIRECT
+custom_proxy_group=🛑 广告拦截`select`[]REJECT`[]DIRECT
 ```
 
-- First `[]` = primary node
-- Last `.*` = regex fallback for all other nodes
-- Nodes sourced from subscription provider
+- `.*` includes actual nodes read from the subscription by the converter
+- Explicit `[]` members may only be built-in policies such as DIRECT and REJECT
+- Keep service groups; do not add region groups, custom groups, automatic selection groups, or group-to-group references
+- Keep DIRECT/REJECT options and preserve whether the default is a built-in policy or an actual node
+- INI conversion does not itself configure native Clash proxy-providers
 
 **Region-to-Service Mapping**:
 
 - US nodes → AI services
 - Singapore → ByteDance/CiciAI
 - Direct (DIRECT) → CN content + Edu
-- Automatic selection (🚀 节点选择) → most services
+- Each service selects an actual subscription node directly; 🚀 节点选择 is used by rules only
 
 ### File Size Convention
 
@@ -98,7 +102,7 @@ custom_proxy_group=🇺🇲 美区AI`select`[]🇺🇲 美国节点`[]🇸🇬 �
 
 - Research service's domain/IP ranges
 - Add patterns to appropriate service ruleset
-- Add region-specific fallbacks in proxy_group if service needs special routing
+- Document any recommended node region; keep group members limited to actual subscription nodes and built-in policies
 
 ## External Dependencies & Data Sources
 
