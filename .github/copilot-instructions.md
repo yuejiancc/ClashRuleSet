@@ -28,7 +28,7 @@ ClashRuleSet is a curated collection of domain/IP filtering rules for **Clash** 
 
 - `kclash.ini`: Connects rules to proxy groups
   - `[custom]` section: `ruleset=label`URL pairs + `custom_proxy_group` definitions
-  - Proxy groups use backtick-separated fields: label, select, then `.*` and optional built-in policies
+  - Proxy groups use backtick-separated fields: label, type, node filters and optional built-in policies; automatic groups also specify a test URL and interval
 - `pref.ini`: Rule generator settings (exclude patterns, base configs, proxy settings)
 
 ## Key Patterns & Conventions
@@ -51,23 +51,24 @@ ClashRuleSet is a curated collection of domain/IP filtering rules for **Clash** 
 **Proxy Group Members** (in `kclash.ini` and `pref.ini`):
 
 ```
-custom_proxy_group=🇺🇲 美区AI`select`.*
+custom_proxy_group=🇺🇲 美区AI`fallback`(?i)(美国|\bUS\b)`(?i)(日本|\bJP\b)`https://www.gstatic.com/generate_204`60
 custom_proxy_group=🔒 Web3`select`.*`[]DIRECT
 custom_proxy_group=🛑 广告拦截`select`[]REJECT`[]DIRECT
 ```
 
 - `.*` includes actual nodes read from the subscription by the converter
 - Explicit `[]` members may only be built-in policies such as DIRECT and REJECT
-- Keep service groups; do not add region groups, custom groups, automatic selection groups, or group-to-group references
+- Keep service groups; do not add standalone region groups, custom groups, automatic selection groups, or group-to-group references
+- Exception: 美区AI itself uses fallback with US nodes first, then Japan nodes, and a 60-second connectivity check; it contains actual nodes only
 - Keep DIRECT/REJECT options and preserve whether the default is a built-in policy or an actual node
 - INI conversion does not itself configure native Clash proxy-providers
 
 **Region-to-Service Mapping**:
 
-- US nodes → AI services
+- US nodes → AI services, with Japan nodes as automatic fallback when all US nodes are unavailable
 - Singapore → ByteDance/CiciAI
 - Direct (DIRECT) → CN content + Edu
-- Each service selects an actual subscription node directly; 🚀 节点选择 is used by rules only
+- Each service uses actual subscription nodes directly; 美区AI selects automatically, other services select manually, and 🚀 节点选择 is used by rules only
 
 ### File Size Convention
 
