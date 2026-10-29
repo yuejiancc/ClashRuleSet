@@ -6,7 +6,7 @@
 
 | 分流规则名称 | 说明                                                                                  |
 | ------------ | ------------------------------------------------------------------------------------- |
-| 🇺🇲 美区AI    | OpenAI、Claude、Grok、Perplexity、Google 与 Gemini；默认美国优先、日本备用，也可手选美国或日本节点 |
+| 🇺🇲 美区AI    | OpenAI、Claude、Grok、Perplexity、Google 与 Gemini；默认美国优先、日本备用，也可手选全部订阅节点 |
 | 🌈 CiciAI    | 建议使用新加坡节点，确保字节海外版的 APP 和 AI 服务可正常使用                         |
 | 👨‍💻 Developer | 建议使用流量大或免费节点，各种 docker 镜像、模型文件下载专用                          |
 | 🔒 Web3      | 建议使用自建的安全节点，避免出现安全风险                                              |
@@ -42,7 +42,7 @@ Hysteria2 协议本身确实是用 UDP 发包给服务器的（这是底层的�
 
 “🎯 全球直连”继续默认 `DIRECT`，广告拦截、应用净化、禁用 IP 归属地等拦截组继续默认 `REJECT`；“🚀 节点选择”保持独立，不引用其他业务组。
 
-`kclash.ini` 中的“🇺🇲 美区AI”为手动选择组，默认选择“♻️ AI自动切换”，也直接列出订阅中的美国和日本节点供手选。选择某个节点后会固定使用该节点；需要自动故障转移时，切回“♻️ AI自动切换”。
+`kclash.ini` 中的“🇺🇲 美区AI”为手动选择组，默认选择“♻️ AI自动切换”，也直接列出全部订阅节点供手选，包括美国和日本节点。手动列表使用 `.*`，不按地区过滤，避免因命名或转换器正则兼容性导致节点缺失。选择某个节点后会固定使用该节点；需要自动故障转移时，切回“♻️ AI自动切换”。
 
 “♻️ AI自动切换”使用 `fallback`：先按订阅顺序尝试美国节点，美国节点全部不可用时切换到日本节点；美国节点恢复可用后优先回到美国节点。节点按名称中的国家、城市、旗帜或 US/JP 等标识匹配，请确保订阅中包含可识别的美国或日本节点。
 
@@ -56,6 +56,6 @@ Hysteria2 协议本身确实是用 UDP 发包给服务器的（这是底层的�
 
 在订阅的 URL 上增加 config=[替换成下面 ini,或自定义]
 
-[https://raw.githubusercontent.com/szkane/ClashRuleSet/main/Clash/kclash.ini](https://raw.githubusercontent.com/szkane/ClashRuleSet/main/Clash/kclash.ini)
+[https://raw.githubusercontent.com/yuejiancc/ClashRuleSet/main/Clash/kclash.ini](https://raw.githubusercontent.com/yuejiancc/ClashRuleSet/main/Clash/kclash.ini)
 
-订阅地址后面增加：`&config=https%3A%2F%2Fraw.githubusercontent.com%2Fszkane%2FClashRuleSet%2Frefs%2Fheads%2Fmain%2FClash%2Fkclash.ini`
+订阅地址后面增加：`&config=https%3A%2F%2Fraw.githubusercontent.com%2Fyuejiancc%2FClashRuleSet%2Frefs%2Fheads%2Fmain%2FClash%2Fkclash.ini`
