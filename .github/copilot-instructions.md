@@ -53,24 +53,26 @@ ClashRuleSet is a curated collection of domain/IP filtering rules for **Clash** 
 ```
 custom_proxy_group=🇺🇲 美区AI`select`[]♻️ AI自动切换`(?i)(美国|\bUS\b)`(?i)(日本|\bJP\b)
 custom_proxy_group=♻️ AI自动切换`fallback`(?i)(美国|\bUS\b)`(?i)(日本|\bJP\b)`https://www.gstatic.com/generate_204`60
-custom_proxy_group=🔒 Web3`select`.*`[]DIRECT
+custom_proxy_group=🔒 Web3`select`[]🚀 节点选择`.*`[]DIRECT
 custom_proxy_group=🛑 广告拦截`select`[]REJECT`[]DIRECT
 ```
 
 - `.*` includes actual nodes read from the subscription by the converter
-- Explicit `[]` members are built-in policies such as DIRECT and REJECT, except for the AI automatic-switch option below
-- Keep service groups; do not add standalone region groups, custom groups, or other automatic selection groups or group-to-group references
+- Explicit `[]` members include built-in policies, the main node-selection group for services, and the AI automatic-switch option below
+- Service groups other than 美区AI, plus 漏网之鱼, must put []🚀 节点选择 first as their default; preserve all existing node filters and built-in options afterward
+- Keep service groups; do not add standalone region groups, custom groups, or other automatic selection groups or group-to-group references beyond these defaults
 - Exception: 美区AI is a select group with AI自动切换 first (the default), followed by actual US and Japan nodes for manual selection
 - AI自动切换 uses fallback with US nodes first, then Japan nodes, and a 60-second connectivity check; it contains actual nodes only
-- Keep DIRECT/REJECT options and preserve whether the default is a built-in policy or an actual node
+- Keep 全球直连 defaulting to DIRECT and all blocking groups defaulting to REJECT; do not add the main selection group to them
+- Keep 🚀 节点选择 independent to avoid self-references or cycles
 - INI conversion does not itself configure native Clash proxy-providers
 
 **Region-to-Service Mapping**:
 
 - US nodes → AI services, with Japan nodes as automatic fallback when all US nodes are unavailable
 - Singapore → ByteDance/CiciAI
-- Direct (DIRECT) → CN content + Edu
-- Each service uses actual subscription nodes directly; 美区AI additionally offers AI自动切换 as its default, and 🚀 节点选择 is used by rules only
+- Direct (DIRECT) → 全球直连; service-specific DIRECT options remain available manually
+- 美区AI defaults to AI自动切换 and offers manual US/Japan nodes; other services and 漏网之鱼 default to 🚀 节点选择 and retain individual node choices
 
 ### File Size Convention
 
@@ -105,7 +107,7 @@ custom_proxy_group=🛑 广告拦截`select`[]REJECT`[]DIRECT
 
 - Research service's domain/IP ranges
 - Add patterns to appropriate service ruleset
-- Document any recommended node region; keep group members limited to actual subscription nodes and built-in policies
+- Document any recommended node region; service groups default to 🚀 节点选择 except for 美区AI, and retain actual subscription nodes and existing built-in policies
 
 ## External Dependencies & Data Sources
 
