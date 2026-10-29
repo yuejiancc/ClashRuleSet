@@ -51,7 +51,7 @@ ClashRuleSet is a curated collection of domain/IP filtering rules for **Clash** 
 **Proxy Group Members** (in `kclash.ini` and `pref.ini`):
 
 ```
-custom_proxy_group=🇺🇲 美区AI`select`[]♻️ AI自动切换`(?i)(日本|\bJP\b)
+custom_proxy_group=🇺🇲 美区AI`select`[]♻️ AI自动切换`(?i)(美国|\bUS\b)`(?i)(日本|\bJP\b)
 custom_proxy_group=♻️ AI自动切换`fallback`(?i)(美国|\bUS\b)`(?i)(日本|\bJP\b)`https://www.gstatic.com/generate_204`60
 custom_proxy_group=🔒 Web3`select`.*`[]DIRECT
 custom_proxy_group=🛑 广告拦截`select`[]REJECT`[]DIRECT
@@ -60,7 +60,7 @@ custom_proxy_group=🛑 广告拦截`select`[]REJECT`[]DIRECT
 - `.*` includes actual nodes read from the subscription by the converter
 - Explicit `[]` members are built-in policies such as DIRECT and REJECT, except for the AI automatic-switch option below
 - Keep service groups; do not add standalone region groups, custom groups, or other automatic selection groups or group-to-group references
-- Exception: 美区AI is a select group with AI自动切换 first (the default), followed by actual Japan nodes for manual selection
+- Exception: 美区AI is a select group with AI自动切换 first (the default), followed by actual US and Japan nodes for manual selection
 - AI自动切换 uses fallback with US nodes first, then Japan nodes, and a 60-second connectivity check; it contains actual nodes only
 - Keep DIRECT/REJECT options and preserve whether the default is a built-in policy or an actual node
 - INI conversion does not itself configure native Clash proxy-providers
