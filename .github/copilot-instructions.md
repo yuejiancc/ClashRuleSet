@@ -51,28 +51,26 @@ ClashRuleSet is a curated collection of domain/IP filtering rules for **Clash** 
 **Proxy Group Members** (in `kclash.ini` and `pref.ini`):
 
 ```
-custom_proxy_group=🇺🇲 美区AI`select`[]♻️ AI自动切换`.*
-custom_proxy_group=♻️ AI自动切换`fallback`(?i)(美国|\bUS\b)`(?i)(日本|\bJP\b)`https://www.gstatic.com/generate_204`60
+custom_proxy_group=🇺🇲 美区AI`select`.*
 custom_proxy_group=🔒 Web3`select`[]🚀 节点选择`.*`[]DIRECT
 custom_proxy_group=🛑 广告拦截`select`[]REJECT`[]DIRECT
 ```
 
 - `.*` includes actual nodes read from the subscription by the converter
-- Explicit `[]` members include built-in policies, the main node-selection group for services, and the AI automatic-switch option below
+- Explicit `[]` members include built-in policies and the main node-selection group for services
 - Service groups other than 美区AI, plus 漏网之鱼, must put []🚀 节点选择 first as their default; preserve all existing node filters and built-in options afterward
 - Keep service groups; do not add standalone region groups, custom groups, or other automatic selection groups or group-to-group references beyond these defaults
-- Exception: 美区AI is a select group with AI自动切换 first (the default), followed by ALL actual subscription nodes via .* for manual selection; do not region-filter this list
-- AI自动切换 uses fallback with US nodes first, then Japan nodes, and a 60-second connectivity check; it contains actual nodes only
+- Exception: 美区AI is a manual select group containing ALL actual subscription nodes via .*; do not region-filter this list or add automatic-switch groups
 - Keep 全球直连 defaulting to DIRECT and all blocking groups defaulting to REJECT; do not add the main selection group to them
 - Keep 🚀 节点选择 independent to avoid self-references or cycles
 - INI conversion does not itself configure native Clash proxy-providers
 
 **Region-to-Service Mapping**:
 
-- US nodes → AI services, with Japan nodes as automatic fallback when all US nodes are unavailable
+- US or Japan nodes → AI services, selected manually
 - Singapore → ByteDance/CiciAI
 - Direct (DIRECT) → 全球直连; service-specific DIRECT options remain available manually
-- 美区AI defaults to AI自动切换 and offers all subscription nodes manually; other services and 漏网之鱼 default to 🚀 节点选择 and retain individual node choices
+- 美区AI offers all subscription nodes manually and defaults to the first subscription node; other services and 漏网之鱼 default to 🚀 节点选择 and retain individual node choices
 
 ### File Size Convention
 
