@@ -51,15 +51,17 @@ ClashRuleSet is a curated collection of domain/IP filtering rules for **Clash** 
 **Proxy Group Members** (in `kclash.ini` and `pref.ini`):
 
 ```
-custom_proxy_group=🇺🇲 美区AI`fallback`(?i)(美国|\bUS\b)`(?i)(日本|\bJP\b)`https://www.gstatic.com/generate_204`60
+custom_proxy_group=🇺🇲 美区AI`select`[]♻️ AI自动切换`(?i)(日本|\bJP\b)
+custom_proxy_group=♻️ AI自动切换`fallback`(?i)(美国|\bUS\b)`(?i)(日本|\bJP\b)`https://www.gstatic.com/generate_204`60
 custom_proxy_group=🔒 Web3`select`.*`[]DIRECT
 custom_proxy_group=🛑 广告拦截`select`[]REJECT`[]DIRECT
 ```
 
 - `.*` includes actual nodes read from the subscription by the converter
-- Explicit `[]` members may only be built-in policies such as DIRECT and REJECT
-- Keep service groups; do not add standalone region groups, custom groups, automatic selection groups, or group-to-group references
-- Exception: 美区AI itself uses fallback with US nodes first, then Japan nodes, and a 60-second connectivity check; it contains actual nodes only
+- Explicit `[]` members are built-in policies such as DIRECT and REJECT, except for the AI automatic-switch option below
+- Keep service groups; do not add standalone region groups, custom groups, or other automatic selection groups or group-to-group references
+- Exception: 美区AI is a select group with AI自动切换 first (the default), followed by actual Japan nodes for manual selection
+- AI自动切换 uses fallback with US nodes first, then Japan nodes, and a 60-second connectivity check; it contains actual nodes only
 - Keep DIRECT/REJECT options and preserve whether the default is a built-in policy or an actual node
 - INI conversion does not itself configure native Clash proxy-providers
 
@@ -68,7 +70,7 @@ custom_proxy_group=🛑 广告拦截`select`[]REJECT`[]DIRECT
 - US nodes → AI services, with Japan nodes as automatic fallback when all US nodes are unavailable
 - Singapore → ByteDance/CiciAI
 - Direct (DIRECT) → CN content + Edu
-- Each service uses actual subscription nodes directly; 美区AI selects automatically, other services select manually, and 🚀 节点选择 is used by rules only
+- Each service uses actual subscription nodes directly; 美区AI additionally offers AI自动切换 as its default, and 🚀 节点选择 is used by rules only
 
 ### File Size Convention
 
