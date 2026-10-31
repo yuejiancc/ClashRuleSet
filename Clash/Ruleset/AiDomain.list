@@ -3,6 +3,9 @@
 DOMAIN-SUFFIX,cerebras.ai
 DOMAIN-SUFFIX,supergpt.dev
 
+# Zed editor and hosted AI
+DOMAIN-SUFFIX,zed.dev
+
 # 内容：OpenAi,claude,recraft,poe,bing,gemini,perplexity
 
 DOMAIN-KEYWORD,openai
