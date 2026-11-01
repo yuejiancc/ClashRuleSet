@@ -1,6 +1,7 @@
 # 3rd part AI router
 
 DOMAIN-SUFFIX,cerebras.ai
+DOMAIN-SUFFIX,supergpt.dev
 
 # Zed editor and hosted AI
 DOMAIN-SUFFIX,zed.dev
